@@ -14,6 +14,7 @@ API_KEY = os.environ["API_KEY"]
 DATABASE_ID = os.environ["DATABASE_ID"]
 NOTION_URL_DB = os.environ["NOTION_URL_DB"]
 
+PATCH_API_ENDPOINT = "https://api.notion.com/v1/pages/"
 
 def main():
     # この日付より前のメモを消すことにする。
@@ -66,6 +67,6 @@ def main():
 
     for page_id in result:
         time.sleep(0.5)
-        notion_url_page = "https://api.notion.com/v1/pages/" + page_id
+        notion_url_page = PATCH_API_ENDPOINT + page_id
         response = requests.request(
             'PATCH', url=notion_url_page, json=payload_del, headers=headers)
